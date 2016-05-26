@@ -1,0 +1,24 @@
+{
+    "name": "xeno010/Wp-Pro-Quiz",
+    "description": "A powerful and beautiful quiz plugin for WordPress.",
+    "version": "0.37",
+    "type": "wp-plugin",
+    "keywords": ["quiz", "wordpress"],
+    "homepage": "http://wordpress.org/extend/plugins/wp-pro-quiz",
+    "time": "2015-05-25",
+    "license": "GPLv2",
+    "authors": [
+        {
+            "name": "Julius Fischer",
+            "homepage": "http://www.it-gecko.de",
+            "role": "Developer"
+        }
+    ],
+    "repositories": [
+    ],
+    "require": {
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+    }
+}
