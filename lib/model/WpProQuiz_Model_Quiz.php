@@ -41,7 +41,7 @@ class WpProQuiz_Model_Quiz extends WpProQuiz_Model_Model
     protected $_questionRandom = false;
     protected $_answerRandom = false;
     protected $_timeLimit = 0;
-    protected $_statisticsOn = false;
+    protected $_statisticsOn = true;
     protected $_statisticsIpLock = 1440;
     protected $_resultGradeEnabled = false;
     protected $_showPoints = false;

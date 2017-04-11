@@ -295,11 +295,8 @@ class WpProQuiz_View_QuizOverall extends WpProQuiz_View_View
         $this->showImportListBox();
         $this->showExportListBox();
         $this->showSetQuizCategoryListBox();
+        $this->showDonateTab();
         ?>
-
-        <div id="wpProQuiz_tab_donat" style="display: none;" class="hide-if-no-js screen-meta-toggle">
-            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KCZPNURT6RYXY" class="button show-settings" target="_blank"><?php _e('Donate', 'wp-pro-quiz'); ?></a>
-        </div>
 
         <div class="wrap wpProQuiz_quizOverall" style="">
             <h2>
@@ -395,6 +392,18 @@ class WpProQuiz_View_QuizOverall extends WpProQuiz_View_View
             $this->perPage);
     }
 
+    public function showDonateTab() {
+
+        if ( ! apply_filters( 'wpProQuiz_show_donate_tab', false ) ) {
+            return;
+        }
+        ?>
+        <div id="wpProQuiz_tab_donat" style="display: none;" class="hide-if-no-js screen-meta-toggle">
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KCZPNURT6RYXY" class="button show-settings" target="_blank"><?php _e('Donate', 'wp-pro-quiz'); ?></a>
+        </div>
+        <?php
+    }
+
     protected function showImportListBox()
     {
         ?>
@@ -459,6 +468,10 @@ class WpProQuiz_View_QuizOverall extends WpProQuiz_View_View
 
     protected function showSetQuizCategoryListBox()
     {
+
+        if ( ! apply_filters( 'wpProQuiz_show_category_list_box_quiz_overall', false ) ) {
+            return;
+        }
         ?>
 
         <div id="wpProQuiz_setQuizCategoryList_box" style="display: none;">
