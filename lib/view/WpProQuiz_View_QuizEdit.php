@@ -65,7 +65,18 @@ class WpProQuiz_View_QuizEdit extends WpProQuiz_View_View
                             <p class="description">
 				                <?php _e('This text will be displayed before start of the quiz.', 'wp-pro-quiz'); ?>
                             </p>
-			                <?php wp_editor($this->quiz->getText(), "text", array( 'textarea_rows' => 5, )); ?>
+			                <?php
+                            wp_editor(
+                                $this->quiz->getText(),
+                                "text",
+                                array(
+                                    'textarea_rows' => 5,
+                                    'media_buttons' => false,
+                                    'quicktags' => false,
+                                    'drag_drop_upload' => false,
+                                )
+                            );
+                            ?>
                         </div>
                     </div>
                     <?php if ( apply_filters( 'wpProQuiz_show_category_list_box_quiz_edit', false ) ) : ?>
@@ -121,54 +132,7 @@ class WpProQuiz_View_QuizEdit extends WpProQuiz_View_View
                                 <tbody>
                                 <tr>
                                     <th scope="row">
-                                        <?php _e('Hide quiz title', 'wp-pro-quiz'); ?>
-                                    </th>
-                                    <td>
-                                        <fieldset>
-                                            <legend class="screen-reader-text">
-                                                <span><?php _e('Hide title', 'wp-pro-quiz'); ?></span>
-                                            </legend>
-                                            <label for="title_hidden">
-                                                <input type="checkbox" id="title_hidden" value="1" name="titleHidden" <?php echo $this->quiz->isTitleHidden() ? 'checked="checked"' : '' ?> >
-                                            </label>
-                                        </fieldset>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <?php _e('Hide "Restart quiz" button', 'wp-pro-quiz'); ?>
-                                    </th>
-                                    <td>
-                                        <fieldset>
-                                            <legend class="screen-reader-text">
-                                                <span><?php _e('Hide "Restart quiz" button', 'wp-pro-quiz'); ?></span>
-                                            </legend>
-                                            <label for="btn_restart_quiz_hidden">
-                                                <input type="checkbox" id="btn_restart_quiz_hidden" value="1" name="btnRestartQuizHidden" <?php echo $this->quiz->isBtnRestartQuizHidden() ? 'checked="checked"' : '' ?> >
-	                                            <?php _e('When a user finishes a quiz, if this quiz allows multiple attempts, hide the button allowing them to restart?', 'wp-pro-quiz'); ?>
-                                            </label>
-                                        </fieldset>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <?php _e('Hide "View question" button', 'wp-pro-quiz'); ?>
-                                    </th>
-                                    <td>
-                                        <fieldset>
-                                            <legend class="screen-reader-text">
-                                                <span><?php _e('Hide "View question" button', 'wp-pro-quiz'); ?></span>
-                                            </legend>
-                                            <label for="btn_view_question_hidden">
-                                                <input type="checkbox" id="btn_view_question_hidden" value="1" name="btnViewQuestionHidden" <?php echo $this->quiz->isBtnViewQuestionHidden() ? 'checked="checked"' : '' ?> >
-	                                            <?php _e('Hide the "View question" button in the Frontend.', 'wp-pro-quiz'); ?>
-                                            </label>
-                                        </fieldset>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <?php _e('Display question randomly', 'wp-pro-quiz'); ?>
+                                        <?php _e('Display questions randomly', 'wp-pro-quiz'); ?>
                                     </th>
                                     <td>
                                         <fieldset>
@@ -235,47 +199,7 @@ class WpProQuiz_View_QuizEdit extends WpProQuiz_View_View
                                 </tr>
                                 <tr>
                                     <th scope="row">
-                                        <?php _e('Statistics', 'wp-pro-quiz'); ?>
-                                    </th>
-                                    <td>
-                                        <fieldset>
-                                            <legend class="screen-reader-text">
-                                                <span><?php _e('Statistics', 'wp-pro-quiz'); ?></span>
-                                            </legend>
-                                            <label for="statistics_on">
-                                                <input type="checkbox" id="statistics_on" value="1" name="statisticsOn" <?php echo $this->quiz->isStatisticsOn() ? 'checked="checked"' : ''; ?>>
-	                                            <?php _e('Statistics are stored for completed quizzes. (Not after every individual question is answered).', 'wp-pro-quiz'); ?>
-                                            </label>
-                                        </fieldset>
-                                    </td>
-                                </tr>
-                                <tr id="statistics_ip_lock_tr" style="display: none;">
-                                    <th scope="row">
-                                        <?php _e('Statistics IP-lock', 'wp-pro-quiz'); ?>
-                                    </th>
-                                    <td>
-                                        <fieldset>
-                                            <legend class="screen-reader-text">
-                                                <span><?php _e('Statistics IP-lock', 'wp-pro-quiz'); ?></span>
-                                            </legend>
-                                            <label for="statistics_ip_lock">
-                                                <input type="number" min="0" class="small-text" id="statistics_ip_lock"
-                                                       value="<?php echo ($this->quiz->getStatisticsIpLock() === null) ? 1440 : $this->quiz->getStatisticsIpLock(); ?>"
-                                                       name="statisticsIpLock">
-                                                <?php _e('in minutes (recommended 1440 minutes = 1 day)',
-                                                    'wp-pro-quiz'); ?>
-                                            </label>
-
-                                            <p class="description">
-                                                <?php _e('Protect the statistics from spam. Result will only be saved every X minutes from same IP. (0 = deactivated)',
-                                                    'wp-pro-quiz'); ?>
-                                            </p>
-                                        </fieldset>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <?php _e('One-try per user', 'wp-pro-quiz'); ?>
+                                        <?php _e('One try per user', 'wp-pro-quiz'); ?>
                                     </th>
                                     <td>
                                         <fieldset>
@@ -315,14 +239,12 @@ class WpProQuiz_View_QuizEdit extends WpProQuiz_View_View
 
                                                 <div id="wpProQuiz_quiz_run_once_cookie" style="margin-top: 10px;">
                                                     <label>
-                                                        <input type="checkbox" value="1"
-                                                               name="quizRunOnceCookie" <?php echo $this->quiz->isQuizRunOnceCookie() ? 'checked="checked"' : '' ?>>
+                                                        <input type="checkbox" value="1" name="quizRunOnceCookie" <?php echo $this->quiz->isQuizRunOnceCookie() ? 'checked="checked"' : '' ?>>
                                                         <?php _e('user identification by cookie', 'wp-pro-quiz'); ?>
                                                     </label>
 
                                                     <p class="description">
-                                                        <?php _e('If you activate this option, a cookie is set additionally for unregistrated (anonymous) users. This ensures a longer assignment of the user than the simple assignment by the IP address.',
-                                                            'wp-pro-quiz'); ?>
+                                                        <?php _e('Set a cookie rather than rely on IP Address', 'wp-pro-quiz'); ?>
                                                     </p>
                                                 </div>
 
@@ -482,7 +404,7 @@ class WpProQuiz_View_QuizEdit extends WpProQuiz_View_View
                                 </tr>
                                 <tr class="wpProQuiz_reviewQuestionOptions" style="display: none;">
                                     <th scope="row">
-                                        <?php _e('Disable skip question', 'wp-pro-quiz'); ?>
+		                                <?php _e('Disable skip question', 'wp-pro-quiz'); ?>
                                     </th>
                                     <td>
                                         <fieldset>
@@ -491,9 +413,96 @@ class WpProQuiz_View_QuizEdit extends WpProQuiz_View_View
                                             </legend>
                                             <label>
                                                 <input type="checkbox" value="1" name="skipQuestionDisabled" <?php $this->checked($this->quiz->isSkipQuestionDisabled()); ?>>
-	                                            <?php _e('Disable the ability to skip a quetion?', 'wp-pro-quiz'); ?>
+				                                <?php _e('Disable the ability to skip a quetion?', 'wp-pro-quiz'); ?>
                                             </label>
 
+                                        </fieldset>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+		                                <?php _e('Hide quiz title', 'wp-pro-quiz'); ?>
+                                    </th>
+                                    <td>
+                                        <fieldset>
+                                            <legend class="screen-reader-text">
+                                                <span><?php _e('Hide title', 'wp-pro-quiz'); ?></span>
+                                            </legend>
+                                            <label for="title_hidden">
+                                                <input type="checkbox" id="title_hidden" value="1" name="titleHidden" <?php echo $this->quiz->isTitleHidden() ? 'checked="checked"' : '' ?> >
+                                            </label>
+                                        </fieldset>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+		                                <?php _e('Hide "Restart quiz" button', 'wp-pro-quiz'); ?>
+                                    </th>
+                                    <td>
+                                        <fieldset>
+                                            <legend class="screen-reader-text">
+                                                <span><?php _e('Hide "Restart quiz" button', 'wp-pro-quiz'); ?></span>
+                                            </legend>
+                                            <label for="btn_restart_quiz_hidden">
+                                                <input type="checkbox" id="btn_restart_quiz_hidden" value="1" name="btnRestartQuizHidden" <?php echo $this->quiz->isBtnRestartQuizHidden() ? 'checked="checked"' : '' ?> >
+				                                <?php _e('When a user finishes a quiz, if this quiz allows multiple attempts, hide the button allowing them to restart?', 'wp-pro-quiz'); ?>
+                                            </label>
+                                        </fieldset>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+		                                <?php _e('Hide "View question" button', 'wp-pro-quiz'); ?>
+                                    </th>
+                                    <td>
+                                        <fieldset>
+                                            <legend class="screen-reader-text">
+                                                <span><?php _e('Hide "View question" button', 'wp-pro-quiz'); ?></span>
+                                            </legend>
+                                            <label for="btn_view_question_hidden">
+                                                <input type="checkbox" id="btn_view_question_hidden" value="1" name="btnViewQuestionHidden" <?php echo $this->quiz->isBtnViewQuestionHidden() ? 'checked="checked"' : '' ?> >
+				                                <?php _e('Hide the "View question" button in the Frontend.', 'wp-pro-quiz'); ?>
+                                            </label>
+                                        </fieldset>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+		                                <?php _e('Statistics', 'wp-pro-quiz'); ?>
+                                    </th>
+                                    <td>
+                                        <fieldset>
+                                            <legend class="screen-reader-text">
+                                                <span><?php _e('Statistics', 'wp-pro-quiz'); ?></span>
+                                            </legend>
+                                            <label for="statistics_on">
+                                                <input type="checkbox" id="statistics_on" value="1" name="statisticsOn" <?php echo $this->quiz->isStatisticsOn() ? 'checked="checked"' : ''; ?>>
+				                                <?php _e('Statistics are stored for completed quizzes. (Not after every individual question is answered).', 'wp-pro-quiz'); ?>
+                                            </label>
+                                        </fieldset>
+                                    </td>
+                                </tr>
+                                <tr id="statistics_ip_lock_tr" style="display: none;">
+                                    <th scope="row">
+		                                <?php _e('Statistics IP-lock', 'wp-pro-quiz'); ?>
+                                    </th>
+                                    <td>
+                                        <fieldset>
+                                            <legend class="screen-reader-text">
+                                                <span><?php _e('Statistics IP-lock', 'wp-pro-quiz'); ?></span>
+                                            </legend>
+                                            <label for="statistics_ip_lock">
+                                                <input type="number" min="0" class="small-text" id="statistics_ip_lock"
+                                                       value="<?php echo ($this->quiz->getStatisticsIpLock() === null) ? 1440 : $this->quiz->getStatisticsIpLock(); ?>"
+                                                       name="statisticsIpLock">
+				                                <?php _e('in minutes (recommended 1440 minutes = 1 day)',
+					                                'wp-pro-quiz'); ?>
+                                            </label>
+
+                                            <p class="description">
+				                                <?php _e('Protect the statistics from spam. Result will only be saved every X minutes from same IP. (0 = deactivated)',
+					                                'wp-pro-quiz'); ?>
+                                            </p>
                                         </fieldset>
                                     </td>
                                 </tr>
@@ -650,9 +659,12 @@ class WpProQuiz_View_QuizEdit extends WpProQuiz_View_View
                                                     <div
                                                         style="margin-bottom: 5px;"><?php wp_editor($resultText['text'][$i],
                                                             'resultText_' . $i, array(
-                                                                'textarea_rows' => 3,
-                                                                'textarea_name' => 'resultTextGrade[text][]'
-                                                            )); ?></div>
+			                                                    'textarea_rows' => 5,
+			                                                    'media_buttons' => false,
+			                                                    'quicktags' => false,
+			                                                    'drag_drop_upload' => false,
+			                                                    'textarea_name' => 'resultTextGrade[text][]',
+		                                                    ) ); ?></div>
                                                     <div
                                                         style="margin-bottom: 5px;background-color: rgb(207, 207, 207);padding: 10px;">
                                                         <?php _e('from:', 'wp-pro-quiz'); ?> <input type="text"
@@ -674,9 +686,12 @@ class WpProQuiz_View_QuizEdit extends WpProQuiz_View_View
                                                 <li style="padding: 5px; border: 1px dotted; <?php echo $i ? 'display:none;' : '' ?>">
                                                     <div style="margin-bottom: 5px;"><?php wp_editor('',
                                                             'resultText_' . $i, array(
-                                                                'textarea_rows' => 3,
-                                                                'textarea_name' => 'resultTextGrade[text][]'
-                                                            )); ?></div>
+			                                                    'textarea_rows' => 5,
+			                                                    'media_buttons' => false,
+			                                                    'quicktags' => false,
+			                                                    'drag_drop_upload' => false,
+			                                                    'textarea_name' => 'resultTextGrade[text][]',
+		                                                    )); ?></div>
                                                     <div
                                                         style="margin-bottom: 5px;background-color: rgb(207, 207, 207);padding: 10px;">
                                                         <?php _e('from:', 'wp-pro-quiz'); ?> <input type="text"
@@ -705,7 +720,12 @@ class WpProQuiz_View_QuizEdit extends WpProQuiz_View_View
                                 <?php
 
                                 $resultText = is_array($resultText) ? '' : $resultText;
-                                wp_editor($resultText, 'resultText', array('textarea_rows' => 5));
+                                wp_editor($resultText, 'resultText', array(
+	                                'textarea_rows' => 5,
+	                                'media_buttons' => false,
+	                                'quicktags' => false,
+	                                'drag_drop_upload' => false,
+                                ));
                                 ?>
                             </div>
 

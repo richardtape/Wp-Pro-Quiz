@@ -76,8 +76,8 @@ class WpProQuiz_Controller_Admin
             WPPROQUIZ_VERSION
         );
 
-        wp_enqueue_style('jquery-ui',
-            '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
+        wp_enqueue_style('jquery-ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
+        wp_enqueue_style( 'wpProQuiz_admin_css', plugins_url('css/wpProQuiz_admin.css', WPPROQUIZ_FILE ) );
 
         $this->localizeScript();
     }

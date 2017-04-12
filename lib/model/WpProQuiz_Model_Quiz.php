@@ -47,7 +47,7 @@ class WpProQuiz_Model_Quiz extends WpProQuiz_Model_Model
     protected $_showPoints = false;
     protected $_quizRunOnce = false;
     protected $_quizRunOnceType = 0;
-    protected $_quizRunOnceCookie = false;
+    protected $_quizRunOnceCookie = true;
     protected $_quizRunOnceTime = 0;
     protected $_numberedAnswer = false;
     protected $_hideAnswerMessageBox = false;

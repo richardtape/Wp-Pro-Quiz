@@ -1,0 +1,27 @@
+.toplevel_page_wpProQuiz #poststuff .inside {
+    margin: 0;
+    padding: 0;
+}
+
+.toplevel_page_wpProQuiz .postbox table.form-table {
+    margin: 0;
+}
+
+.toplevel_page_wpProQuiz tr:nth-of-type(even) {
+    background: #f9f9f9;
+}
+
+.toplevel_page_wpProQuiz #poststuff h3.hndle + .inside > * {
+    margin: 10px;
+}
+
+.toplevel_page_wpProQuiz #poststuff h3.hndle + .inside > .form-table {
+    margin: 0;
+}
+
+.toplevel_page_wpProQuiz #poststuff h3.hndle + .inside > .form-table th,
+.toplevel_page_wpProQuiz #poststuff h3.hndle + .inside > .form-table td {
+    padding: 20px;
+    margin: 0;
+    line-height: 1;
+}
